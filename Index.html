@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Bhumika ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            height: 100vh;
+            overflow: hidden;
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            /* Cute background pattern */
+            background-color: #ffe6e6;
+            background-image: radial-gradient(#ffb3b3 2px, transparent 2px);
+            background-size: 30px 30px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(255, 77, 109, 0.2);
+            text-align: center;
+            max-width: 90%;
+            width: 400px;
+            position: relative;
+            z-index: 10;
+            border: 2px solid #fff0f3;
+        }
+
+        .header-names {
+            font-family: 'Pacifico', cursive;
+            font-size: 32px;
+            color: #ff4d6d;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 0px rgba(255, 200, 221, 0.5);
+        }
+
+        h1 {
+            color: #590d22;
+            font-size: 24px;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .gif-container {
+            margin-bottom: 20px;
+        }
+
+        .gif-container img {
+            width: 150px;
+            border-radius: 15px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+            position: relative;
+            min-height: 60px; /* Space for buttons */
+        }
+
+        button {
+            padding: 12px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Nunito', sans-serif;
+            font-weight: bold;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        #yesBtn {
+            background: #ff4d6d;
+            color: white;
+            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
+        }
+
+        #yesBtn:hover {
+            transform: scale(1.05);
+            background: #ff2a55;
+        }
+
+        #noBtn {
+            background: #e9ecef;
+            color: #495057;
+            position: absolute; /* Allows it to move freely */
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .result-text {
+            font-size: 22px;
+            color: #ff4d6d;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .sub-text {
+            font-size: 16px;
+            color: #590d22;
+            margin-top: 10px;
+        }
+
+        /* Floating Hearts Animation */
+        .floating-heart {
+            position: absolute;
+            color: #ff4d6d;
+            animation: float 6s linear infinite;
+            opacity: 0;
+            font-size: 24px;
+            z-index: 1;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            50% { opacity: 0.8; }
+            100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div id="main-content">
+            <div class="header-names">Bhumika & Kunal</div>
+            
+            <div class="gif-container">
+                <img src="https://media.tenor.com/K1C8c823f6cAAAAi/bear-love.gif" alt="Cute Bear">
+            </div>
+
+            <h1>Hey Bhumika! 💕<br>Will you be my forever Valentine?</h1>
+
+            <div class="buttons">
+                <button id="yesBtn" onclick="acceptLove()">YES! 💖</button>
+                <button id="noBtn" onmouseover="moveNo()" ontouchstart="moveNo()">No 🙈</button>
+            </div>
+        </div>
+
+        <div id="success-content" class="hidden">
+            <div class="gif-container">
+                <img src="https://media.tenor.com/gUiu1zyxfzYAAAAi/bear-kiss-bear-kisses.gif" alt="Happy Bear" style="width: 200px;">
+            </div>
+            <div class="result-text">YAYYYY! 🥰</div>
+            <p class="sub-text">
+                You just made my heart the happiest! ❤️<br>
+                I promise to love you always.<br>
+                <br>
+                <b>Love, Kunal</b>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function moveNo() {
+            const noBtn = document.getElementById("noBtn");
+            const container = document.querySelector(".container");
+            
+            // Calculate available space
+            const maxWidth = window.innerWidth - noBtn.offsetWidth;
+            const maxHeight = window.innerHeight - noBtn.offsetHeight;
+
+            // Generate random position
+            const randomX = Math.random() * maxWidth;
+            const randomY = Math.random() * maxHeight;
+
+            // Apply new position using fixed positioning to let it go anywhere on screen
+            noBtn.style.position = "fixed";
+            noBtn.style.left = randomX + "px";
+            noBtn.style.top = randomY + "px";
+        }
+
+        function acceptLove() {
+            // Hide the question, show the love
+            document.getElementById("main-content").classList.add("hidden");
+            document.getElementById("success-content").classList.remove("hidden");
+            
+            // Trigger Confetti
+            launchConfetti();
+        }
+
+        // Confetti effect function
+        function launchConfetti() {
+            var duration = 3000;
+            var end = Date.now() + duration;
+
+            (function frame() {
+                confetti({
+                    particleCount: 5,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 },
+                    colors: ['#ff4d6d', '#ffb3c1', '#c9184a']
+                });
+                confetti({
+                    particleCount: 5,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 },
+                    colors: ['#ff4d6d', '#ffb3c1', '#c9184a']
+                });
+
+                if (Date.now() < end) {
+                    requestAnimationFrame(frame);
+                }
+            }());
+        }
+
+        // Add background floating hearts
+        setInterval(() => {
+            const heart = document.createElement("div");
+            heart.classList.add("floating-heart");
+            heart.innerHTML = "❤️";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = Math.random() * 3 + 2 + "s";
+            document.body.appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }, 500);
+    </script>
+
+</body>
+</html>
